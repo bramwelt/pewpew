@@ -34,7 +34,7 @@ GameState.prototype = {
 
       this.game.time.advancedTiming = true;
       this.fps_text = this.game.add.text(
-        2, this.game.height-17, '', { font: '16px Arial', fill: '#ffffff' }
+        2, this.game.height-17, '', { font: '16px Arial', fill: '#ffff00' }
       );
     },
 
