@@ -6,7 +6,6 @@ GameState = function(game) {
     this.game = game;
     this.midx = (game.width/2)-16;
     this.player = new Player(game);
-    this.cursor = null;
 }
 
 GameState.prototype = {
@@ -22,6 +21,8 @@ GameState.prototype = {
     create: function() {
       var game = this.game
 
+      this.cursors = this.game.input.keyboard.createCursorKeys();
+
       game.physics.startSystem(Phaser.Physics.ARCADE);
       game.add.sprite(0, 0, 'background');
 
@@ -36,6 +37,7 @@ GameState.prototype = {
       this.fps_text = this.game.add.text(
         2, this.game.height-17, '', { font: '16px Arial', fill: '#ffff00' }
       );
+      this.fps_text.visible = false;
     },
 
     update: function() {
@@ -43,6 +45,14 @@ GameState.prototype = {
 
       if (this.game.time.fps !== 0) {
         this.fps_text.setText(this.game.time.fps + ' FPS');
+      }
+
+      var D = this.game.input.keyboard.addKey(Phaser.Keyboard.D);
+
+      if (D.isDown && this.fps_text.visible) {
+        this.fps_text.visible = false; 
+      } else if (D.isDown && !this.fps_text.visible) {
+        this.fps_text.visible = true;
       }
     },
 }; 
