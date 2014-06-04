@@ -1,6 +1,6 @@
 TODO
 ====
-- [ ] Seperate Player, Enemy, World objects
+- [x] Seperate Player, Enemy, World objects
   - http://toastedware.com/?p=258
 - [ ] Enemies
   - [ ] Bullet/missle & collision w/enemy
