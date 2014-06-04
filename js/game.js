@@ -3,18 +3,16 @@
  */
  
 GameState = function(game) {
-    this.game = game;
-    this.midx = (game.width/2)-16;
-    this.player = new Player(game);
     this.board = new GameWorld(game);
+    this.player = new Player(game);
+    this.enemies = new Enemies(game);
 }
 
 GameState.prototype = {
     preload: function() {
-      console.log(this.world)
       this.board.preload()
       this.player.preload()
-      this.game.load.image('enemy', 'img/enemy.png');
+      this.enemies.preload()
     },
 
     /**
@@ -23,11 +21,7 @@ GameState.prototype = {
     create: function() {
       this.board.create()
       this.player.create()
-
-      var enemies = this.game.add.group();
-      enemies.create(this.midx-32, 0, 'enemy');
-      enemies.create(this.midx, 0, 'enemy');
-      enemies.create(this.midx+32, 0, 'enemy');
+      this.enemies.create()
     },
 
     update: function() {
