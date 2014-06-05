@@ -19,7 +19,7 @@ Player.prototype = {
     },
 
     create: function() {
-      this.sprite = this.game.add.sprite(this.game.midx, this.game.height-32,'player');
+      this.sprite = this.game.add.sprite(400, (600-32),'player');
       this.cursors = this.game.input.keyboard.createCursorKeys();
       this.game.physics.arcade.enable(this.sprite);
     },
