@@ -30,5 +30,5 @@ GameState.prototype = {
     },
 }; 
 
-var game = new Phaser.Game(400, 300, Phaser.AUTO, 'game');
+var game = new Phaser.Game(800, 600, Phaser.AUTO, 'game');
 game.state.add('game', GameState, true);
