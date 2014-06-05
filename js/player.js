@@ -34,10 +34,5 @@ Player.prototype = {
       } else {
           this.sprite.animations.stop();
       }
-      
-      if (this.cursors.up.isDown && this.sprite.body.touching.down) {
-          this.sprite.body.velocity.y = -350;
-      }
-
     }
 };
