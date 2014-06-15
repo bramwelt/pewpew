@@ -23,6 +23,7 @@ GameState.prototype = {
       player = new Player(this.game, this.game.world.centerX, this.game.world.height);
       player.anchor.setTo(0.5, 0.5);
       player.position.y -= player.height/2;
+      player.body.collideWorldBounds = true;
 
       this.game.add.existing(board);
       this.enemies.create()
