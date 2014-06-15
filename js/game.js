@@ -3,15 +3,15 @@
  */
  
 GameState = function(game) {
+    this.game = game;
     this.board = new GameWorld(game);
-    this.player = new Player(game);
     this.enemies = new Enemies(game);
 }
 
 GameState.prototype = {
     preload: function() {
+      Player.prototype.preload(this.game)
       this.board.preload()
-      this.player.preload()
       this.enemies.preload()
     },
 
@@ -20,14 +20,21 @@ GameState.prototype = {
      */
     create: function() {
       this.board.create()
-      this.player.create()
       this.enemies.create()
+
+      player = new Player(this.game, this.game.world.centerX, this.game.world.height);
+      player.position.y -= player.height/2;
+      player.anchor.setTo(0.5, 0.5);
+      this.game.add.existing(player);
     },
 
     update: function() {
       this.board.update();
-      this.player.update();
     },
+
+    //render: function() {
+    //  this.player.render();
+    //}
 }; 
 
 var game = new Phaser.Game(800, 600, Phaser.AUTO, 'game');
