@@ -20,13 +20,12 @@ GameState.prototype = {
     create: function() {
       board = new GameWorld(this.game);
 
-      this.enemies.create()
-
       player = new Player(this.game, this.game.world.centerX, this.game.world.height);
       player.anchor.setTo(0.5, 0.5);
       player.position.y -= player.height/2;
 
       this.game.add.existing(board);
+      this.enemies.create()
       this.game.add.existing(player);
     },
 
