@@ -9,7 +9,7 @@
  * interact with scenes.
  */
 Player = function(game, x, y) {
-    Phaser.Sprite.call(this, game, x, y, 'player', 0);
+    Phaser.Sprite.call(this, game, x, y, 'player');
     game.physics.arcade.enable(this);
     this.cursors = this.game.input.keyboard.createCursorKeys();
 };
