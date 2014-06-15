@@ -4,27 +4,29 @@
  
 GameState = function(game) {
     this.game = game;
-    this.board = new GameWorld(game);
     this.enemies = new Enemies(game);
 }
 
 GameState.prototype = {
     preload: function() {
-      Player.prototype.preload(this.game)
-      this.board.preload()
-      this.enemies.preload()
+      Player.prototype.preload(this.game);
+      GameWorld.prototype.preload(this.game);
+      this.enemies.preload();
     },
 
     /**
      * Create the game
      */
     create: function() {
-      this.board.create()
+      board = new GameWorld(this.game);
+
       this.enemies.create()
 
       player = new Player(this.game, this.game.world.centerX, this.game.world.height);
       player.anchor.setTo(0.5, 0.5);
       player.position.y -= player.height/2;
+
+      this.game.add.existing(board);
       this.game.add.existing(player);
     },
 
