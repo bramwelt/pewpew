@@ -30,7 +30,7 @@ Player.prototype.create = function() {
 };
 
 Player.prototype.preload = function(game) {
-    game.load.image('player', 'img/player.png');
+    game.load.spritesheet('player', 'img/player.png', 13, 7, 2);
     Laser.prototype.preload(game);
 };
 
