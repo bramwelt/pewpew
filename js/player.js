@@ -1,13 +1,6 @@
 /**
  * Player
  */
-
-/**
- * Player Constructor
- *
- * Initialize with the game object, so that we can add sprites and
- * interact with scenes.
- */
 Player = function(game, x, y) {
     Phaser.Sprite.call(this, game, x, y, 'player');
 };
