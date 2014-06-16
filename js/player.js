@@ -24,10 +24,14 @@ Player.prototype.create = function() {
 
     this.anchor.setTo(0.5, 0.5);
     this.position.y -= player.height/2;
+
+    this.laser = new Laser(this.game);
+    this.laser.create();
 };
 
 Player.prototype.preload = function(game) {
     game.load.image('player', 'img/player.png');
+    Laser.prototype.preload(game);
 };
 
 Player.prototype.update = function() {
@@ -37,6 +41,10 @@ Player.prototype.update = function() {
         this.body.velocity.x = -150;
     } else if (this.cursors.right.isDown) {
         this.body.velocity.x = 150;
+    }
+
+    if (this.game.input.keyboard.isDown(Phaser.Keyboard.SPACEBAR)) {
+        this.laser.fire();
     }
 };
 
