@@ -10,7 +10,6 @@ GameState = function(game) {
 GameState.prototype = {
     preload: function() {
       Player.prototype.preload(this.game);
-      GameWorld.prototype.preload(this.game);
       this.enemies.preload();
     },
 
@@ -18,12 +17,9 @@ GameState.prototype = {
      * Create the game
      */
     create: function() {
-      board = new GameWorld(this.game);
-
       player = new Player(this.game, this.game.world.centerX, this.game.world.height);
       player.create();
 
-      this.game.add.existing(board);
       this.enemies.create()
       this.game.add.existing(player);
     },
