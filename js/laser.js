@@ -1,21 +1,21 @@
 
 Laser = function(game) {
-  Phaser.Sprite.call(this, game, 0, 0, 'laser');
+  Phaser.Group.call(this, game);
   this.lastFireTime = null;
 };
 
-Laser.prototype = Object.create(Phaser.Sprite.prototype);
+Laser.prototype = Object.create(Phaser.Group.prototype);
 Laser.prototype.constructor = Laser;
 
 Laser.prototype.preload = function(game) {
   game.load.image('laser', 'img/bullet.png');
 };
 
-Laser.prototype.create = function() {
+Laser.prototype.initialize = function(player) {
   this.laserPool = this.game.add.group();
 
-  var laser = this.game.add.sprite(this.game.world.height, this.game.world.width/2, 'laser');
-  this.game.physics.enable(laser, Phaser.Physics.ARCADE);
+  var laser = this.create(player.x, player.y, 'laser');
+  this.game.physics.arcade.enable(laser);
   laser.anchor.setTo(0.5, 0.5);
   laser.kill();
 
@@ -29,8 +29,8 @@ Laser.prototype.fire = function() {
 
     laser.revive();
 
-    laser.checkWorldBounds = true;
     laser.outOfBoundsKill = true;
+    laser.checkWorldBounds = true;
 
     laser.reset(player.x, player.y);
 

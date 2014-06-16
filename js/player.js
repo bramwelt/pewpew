@@ -19,7 +19,9 @@ Player.prototype.create = function() {
     this.position.y -= player.height/2;
 
     this.laser = new Laser(this.game);
-    this.laser.create();
+    this.laser.initialize(this.position);
+
+    this.game.add.existing(this.laser);
 };
 
 Player.prototype.preload = function(game) {
