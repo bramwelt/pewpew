@@ -17,7 +17,7 @@ GameState.prototype = {
      * Create the game
      */
     create: function() {
-      player = new Player(this.game, this.game.world.centerX, this.game.world.height);
+      player = new Player(this.game, this.game.world.centerX, this.game.world.height-16);
       player.create();
 
       this.enemies.create()
