@@ -31,6 +31,3 @@ GameState.prototype = {
     //  this.player.render();
     //}
 }; 
-
-var game = new Phaser.Game(400, 300, Phaser.AUTO, 'game');
-game.state.add('game', GameState, true);
