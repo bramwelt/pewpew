@@ -2,12 +2,12 @@
  * My first game!
  */
  
-GameState = function(game) {
+Level1 = function(game) {
     this.game = game;
     this.enemies = new Enemies(game);
 }
 
-GameState.prototype = {
+Level1.prototype = {
     preload: function() {
       Player.prototype.preload(this.game);
       this.enemies.preload();
