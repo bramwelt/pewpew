@@ -7,10 +7,6 @@ Laser = function(game) {
 Laser.prototype = Object.create(Phaser.Group.prototype);
 Laser.prototype.constructor = Laser;
 
-Laser.prototype.preload = function(game) {
-  game.load.image('laser', 'img/bullet.png');
-};
-
 Laser.prototype.initialize = function(player) {
   this.laserPool = this.game.add.group();
 

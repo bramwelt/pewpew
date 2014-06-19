@@ -24,11 +24,6 @@ Player.prototype.create = function() {
     this.game.add.existing(this.laser);
 };
 
-Player.prototype.preload = function(game) {
-    game.load.spritesheet('player', 'img/player.png', 13, 7, 2);
-    Laser.prototype.preload(game);
-};
-
 Player.prototype.update = function() {
     this.body.velocity.x = 0;
  
