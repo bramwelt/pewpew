@@ -1,30 +1,32 @@
 /**
  * Player
  */
-Player = function(game, x, y) {
-    Phaser.Sprite.call(this, game, x, y, 'player');
+PewPew.Player = function(game) {
+    this.lastFireTime = null;
 };
 
-Player.prototype = Object.create(Phaser.Sprite.prototype);
-Player.prototype.contructor = Player;
 
-Player.prototype.create = function() {
-    this.game.physics.arcade.enable(this);
-    this.body.collideWorldBounds = true;
+PewPew.Player.prototype {
 
-    this.cursors = this.game.input.keyboard.createCursorKeys();
-    this.game.input.keyboard.addKeyCapture([Phaser.Keyboard.SPACEBAR]);
+  create: function () {
+    this.player = this.add.sprite(this.world.centerX, (this.world.height-16), 'player');
+    this.player.anchor.setTo(0.5, 0.5);
+    this.player.position.y -= player.height/2;
 
-    this.anchor.setTo(0.5, 0.5);
-    this.position.y -= player.height/2;
+    this.laser = this.add.group()
+    var l = this.laser.create(this.player.x, this.player.y, 'laser');
+    l.anchor.setTo(0.5, 0.5);
+    l.kill();
 
-    this.laser = new Laser(this.game);
-    this.laser.initialize(this.position);
+    this.physics.arcade.enable([this.player, this.laser]);
 
-    this.game.add.existing(this.laser);
-};
+    this.player.body.collideWorldBounds = true;
 
-Player.prototype.update = function() {
+    this.cursors = this.input.keyboard.createCursorKeys();
+    this.input.keyboard.addKeyCapture([Phaser.Keyboard.SPACEBAR]);
+  },
+
+  update: function() {
     this.body.velocity.x = 0;
  
     if (this.cursors.left.isDown) {
@@ -33,11 +35,27 @@ Player.prototype.update = function() {
         this.body.velocity.x = 150;
     }
 
-    if (this.game.input.keyboard.isDown(Phaser.Keyboard.SPACEBAR)) {
+    if (this.input.keyboard.isDown(Phaser.Keyboard.SPACEBAR)) {
         this.laser.fire();
     }
-};
+  },
 
-Player.prototype.render = function() {
-    this.game.debug.spriteInfo(this, 32, 32);
+  fireLaser: function() {
+    if (this.time.now > this.lastFireTime) {
+      var l = this.laser.getFirstDead();
+      if (l == null) return;
+
+      l.revive();
+
+      l.outOfBoundsKill = true;
+      l.checkWorldBounds = true;
+
+      l.reset(this.player.x, this.player.y);
+
+      l.body.velocity.y = -300;
+      l.body.velocity.x = 0;
+
+      laserFireTime = (this.time.now + 150);
+    }
+  },
 };
