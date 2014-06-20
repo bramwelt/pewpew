@@ -2,15 +2,14 @@
  * Enemies
  */
 
-Enemies = function(game) {
+PewPew.Enemies = function(game) {
   Phaser.Group.call(this, game);
 }
 
-Enemies.prototype = Object.create(Phaser.Group.prototype);
-Enemies.prototype.constructor = Enemies;
+PewPew.Enemies.prototype = Object.create(Phaser.Group.prototype);
+PewPew.Enemies.prototype.constructor = PewPew.Enemies;
 
-Enemies.prototype.initialize = function() {
-  //this.enemy_group = this.game.add.group();
+PewPew.Enemies.prototype.initialize = function() {
   for (var x = 0; x < 11; x++) {
       var enemy = this.create(2+(x*18), 0, 'enemy1');
       enemy.animations.add('fly');

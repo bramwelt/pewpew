@@ -26,7 +26,7 @@ PewPew.Game.prototype = {
 
     this.player = new PewPew.Player(this.game);
 
-    this.enemies = new Enemies(this.game);
+    this.enemies = new PewPew.Enemies(this.game);
     this.enemies.initialize()
 
     this.cursors = this.input.keyboard.createCursorKeys();
