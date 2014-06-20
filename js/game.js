@@ -4,7 +4,11 @@
  * Main game class. May later become 'level1' or a parameterized class
  * that initializes the level with 'difficulties'.
  */
-PewPew.Game = function(game) {};
+PewPew.Game = function(game) {
+    this.player;
+    this.enemies;
+    this.cursors;
+};
 
 
 PewPew.Game.prototype = {
@@ -20,19 +24,36 @@ PewPew.Game.prototype = {
   create: function() {
     this.physics.startSystem(Phaser.Physics.ARCADE);
 
-    var player = new PewPew.Player(this.game);
-    //console.log(player);
-    //player.create();
-    //console.log(player);
+    this.player = new PewPew.Player(this.game);
 
-    var enemies = new Enemies(this.game);
-    enemies.initialize()
+    this.enemies = new Enemies(this.game);
+    this.enemies.initialize()
 
-    this.game.add.existing(player);
-    this.game.add.existing(enemies);
+    this.cursors = this.input.keyboard.createCursorKeys();
+    this.input.keyboard.addKeyCapture([Phaser.Keyboard.SPACEBAR]);
+
+    this.game.add.existing(this.player);
+    this.game.add.existing(this.enemies);
   },
 
   update: function() {
+    this.game.physics.arcade.overlap(this.player.laser, this.enemies, this.collisionHandler, null, this);
 
+    this.player.body.velocity.x = 0;
+ 
+    if (this.cursors.left.isDown) {
+        this.player.body.velocity.x = -150;
+    } else if (this.cursors.right.isDown) {
+        this.player.body.velocity.x = 150;
+    }
+
+    if (this.input.keyboard.isDown(Phaser.Keyboard.SPACEBAR)) {
+        this.player.fireLaser();
+    }
+  },
+
+  collisionHandler: function(laser, enemy) {
+    laser.kill();
+    enemy.kill();
   },
 };

@@ -33,6 +33,8 @@ Enemies.prototype.initialize = function() {
   this.position.x = this.game.world.centerX/2;
   this.position.y = (this.game.world.centerX/2)-64;
 
+  this.game.physics.arcade.enable(this);
+
   mothership = this.create(this.midx+64, 0, 'mothership');
   mothership.animations.add('fly');
   mothership.animations.play('fly', 1, true);
