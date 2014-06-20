@@ -1,61 +1,66 @@
 /**
  * Player
+ *
+ * Extends the Phaser.Sprite class.
  */
 PewPew.Player = function(game) {
-    this.lastFireTime = null;
+  //console.log(game.world.centerX);
+  //console.log(game.world.height);
+  Phaser.Sprite.call(this, game, game.world.centerX, (game.world.height-16), 'player');
+
+  this.lastFireTime = null;
+  this.cursors;
+
+  return this;
 };
 
+PewPew.Player.prototype = Object.create(Phaser.Sprite.prototype);
+PewPew.Player.prototype.constructor = PewPew.Player;
 
-PewPew.Player.prototype {
 
-  create: function () {
-    this.player = this.add.sprite(this.world.centerX, (this.world.height-16), 'player');
-    this.player.anchor.setTo(0.5, 0.5);
-    this.player.position.y -= player.height/2;
+PewPew.Player.prototype.create = function () {
+  this.laser = this.game.add.group()
+  var l = this.laser.create(this.x, this.y, 'laser');
+  l.anchor.setTo(0.5, 0.5);
+  l.kill();
 
-    this.laser = this.add.group()
-    var l = this.laser.create(this.player.x, this.player.y, 'laser');
-    l.anchor.setTo(0.5, 0.5);
-    l.kill();
+  this.game.physics.arcade.enable([this, this.laser]);
+  console.log(this.body);
+  this.body.collideWorldBounds = true;
 
-    this.physics.arcade.enable([this.player, this.laser]);
+  this.cursors = this.game.input.keyboard.createCursorKeys();
+  this.game.input.keyboard.addKeyCapture([Phaser.Keyboard.SPACEBAR]);
+};
 
-    this.player.body.collideWorldBounds = true;
+//PewPew.Player.prototype.update = function() {
+//  this.body.velocity.x = 0;
+// 
+//  if (this.cursors.left.isDown) {
+//      this.body.velocity.x = -150;
+//  } else if (this.cursors.right.isDown) {
+//      this.body.velocity.x = 150;
+//  }
+//
+//  if (this.game.input.keyboard.isDown(Phaser.Keyboard.SPACEBAR)) {
+//      this.fireLaser();
+//  }
+//};
 
-    this.cursors = this.input.keyboard.createCursorKeys();
-    this.input.keyboard.addKeyCapture([Phaser.Keyboard.SPACEBAR]);
-  },
+PewPew.Player.prototype.fireLaser = function() {
+  if (this.game.time.now <= this.lastFireTime) return;
 
-  update: function() {
-    this.body.velocity.x = 0;
- 
-    if (this.cursors.left.isDown) {
-        this.body.velocity.x = -150;
-    } else if (this.cursors.right.isDown) {
-        this.body.velocity.x = 150;
-    }
+  var l = this.laser.getFirstDead();
+  if (l == null) return;
 
-    if (this.input.keyboard.isDown(Phaser.Keyboard.SPACEBAR)) {
-        this.laser.fire();
-    }
-  },
+  l.revive();
 
-  fireLaser: function() {
-    if (this.time.now > this.lastFireTime) {
-      var l = this.laser.getFirstDead();
-      if (l == null) return;
+  l.outOfBoundsKill = true;
+  l.checkWorldBounds = true;
 
-      l.revive();
+  l.reset(this.x, this.y);
 
-      l.outOfBoundsKill = true;
-      l.checkWorldBounds = true;
+  l.body.velocity.y = -300;
+  l.body.velocity.x = 0;
 
-      l.reset(this.player.x, this.player.y);
-
-      l.body.velocity.y = -300;
-      l.body.velocity.x = 0;
-
-      laserFireTime = (this.time.now + 150);
-    }
-  },
+  this.lastFireTime = (this.game.time.now + 150);
 };

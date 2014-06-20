@@ -9,13 +9,6 @@ Enemies = function(game) {
 Enemies.prototype = Object.create(Phaser.Group.prototype);
 Enemies.prototype.constructor = Enemies;
 
-Enemies.prototype.preload = function() {
-  this.game.load.spritesheet('enemy1', 'img/enemy1.png', 8, 8, 2);
-  this.game.load.spritesheet('enemy2', 'img/enemy2.png', 11, 8, 2);
-  this.game.load.spritesheet('enemy3', 'img/enemy3.png', 12, 8, 2);
-  this.game.load.spritesheet('mothership', 'img/mothership.png', 16, 7, 3);
-};
-
 Enemies.prototype.initialize = function() {
   //this.enemy_group = this.game.add.group();
   for (var x = 0; x < 11; x++) {

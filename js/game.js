@@ -18,14 +18,18 @@ PewPew.Game.prototype = {
   },
 
   create: function() {
-    player = new Player(this.game, this.game.world.centerX, this.game.world.height-16);
-    player.create();
+    this.physics.startSystem(Phaser.Physics.ARCADE);
 
-    enemies = new Enemies(this.game);
+    var player = new PewPew.Player(this.game);
+    //console.log(player);
+    //player.create();
+    //console.log(player);
+
+    var enemies = new Enemies(this.game);
     enemies.initialize()
 
-    this.game.add.existing(enemies);
     this.game.add.existing(player);
+    this.game.add.existing(enemies);
   },
 
   update: function() {

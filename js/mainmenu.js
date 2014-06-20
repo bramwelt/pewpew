@@ -4,6 +4,8 @@
  * Creates and show the main menu screen when the game starts.
  *  - Displays point values for invaders.
  */
+PewPew = {};
+
 PewPew.MainMenu = function(game) {};
 
 
