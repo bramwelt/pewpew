@@ -4,7 +4,7 @@
  * Extends the Phaser.Sprite class.
  */
 PewPew.Player = function(game) {
-  Phaser.Sprite.call(this, game, game.world.centerX, (game.world.height-16), 'player');
+  Phaser.Sprite.call(this, game, game.world.centerX, (game.world.height-32), 'player');
 
   this.lastFireTime = null;
 
@@ -33,7 +33,7 @@ PewPew.Player.prototype.fireLaser = function() {
   l.outOfBoundsKill = true;
   l.checkWorldBounds = true;
 
-  l.reset(this.x, this.y);
+  l.reset((this.x+this.width/2), (this.y+this.height));
 
   l.body.velocity.y = -300;
   l.body.velocity.x = 0;
