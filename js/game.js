@@ -24,6 +24,7 @@ PewPew.Game.prototype = {
 
   create: function() {
     this.physics.startSystem(Phaser.Physics.ARCADE);
+    this.game.stage.smoothed = false;
 
     this.player = new PewPew.Player(this.game);
 
@@ -31,9 +32,9 @@ PewPew.Game.prototype = {
     this.enemies.initialize();
 
     this.explosions = this.game.add.group();
-    this.explosion = this.explosions.create(0, 0, 'explosion');
-    this.explosion.kill();
-    this.explosion.animations.add('explode');
+    this.explosions.createMultiple(55, 'explosion');
+    this.explosions.callAll('anchor.setTo', 'anchor', 0.5, 0.5);
+    this.explosions.callAll('animations.add', 'animations', 'explode');
 
     this.cursors = this.input.keyboard.createCursorKeys();
     this.input.keyboard.addKeyCapture([Phaser.Keyboard.SPACEBAR]);
@@ -61,8 +62,9 @@ PewPew.Game.prototype = {
   collisionHandler: function(laser, enemy) {
     laser.kill();
     enemy.kill();
-    this.explosion.reset(this.enemies.x+enemy.x, this.enemies.y+enemy.y);
-    this.explosion.revive();
-    this.explosion.animations.play('explode', 2, false);
+    var explosion = this.explosions.getFirstDead();
+    explosion.reset(enemy.x, enemy.y);
+    explosion.revive();
+    explosion.animations.play('explode', 2, false);
   },
 };
