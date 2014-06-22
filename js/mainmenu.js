@@ -21,8 +21,11 @@ PewPew.MainMenu.prototype = {
         fill: '#ffffff',
         align: 'center',
     };
-    var title = this.game.add.text(this.game.world.centerX, 8, 'PewPew: Now with more lasers!', style);
+    var title = this.game.add.text(this.game.world.centerX, 16, 'PewPew: Now with more lasers!', style);
     title.anchor.setTo(0.5, 0);
+    var instructions = this.game.add.text(this.game.world.centerX, this.game.world.height-32, 'Click to Start', style);
+    instructions.anchor.setTo(0.5, 0);
+    instructions.fontSize = 14;
     this.input.onDown.addOnce(this.begin, this);
   },
 
