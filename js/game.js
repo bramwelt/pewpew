@@ -38,6 +38,9 @@ PewPew.Game.prototype = {
 
     this.cursors = this.input.keyboard.createCursorKeys();
     this.input.keyboard.addKeyCapture([Phaser.Keyboard.SPACEBAR]);
+    this.cursors.J = this.input.keyboard.addKey(Phaser.Keyboard.J);
+    this.cursors.A = this.input.keyboard.addKey(Phaser.Keyboard.A);
+    this.cursors.D = this.input.keyboard.addKey(Phaser.Keyboard.D);
 
     this.game.add.existing(this.player);
     this.game.add.existing(this.enemies);
@@ -48,13 +51,13 @@ PewPew.Game.prototype = {
 
     this.player.body.velocity.x = 0;
  
-    if (this.cursors.left.isDown) {
+    if (this.cursors.left.isDown || this.cursors.A.isDown) {
         this.player.body.velocity.x = -150;
-    } else if (this.cursors.right.isDown) {
+    } else if (this.cursors.right.isDown || this.cursors.D.isDown) {
         this.player.body.velocity.x = 150;
     }
 
-    if (this.input.keyboard.isDown(Phaser.Keyboard.SPACEBAR)) {
+    if (this.input.keyboard.isDown(Phaser.Keyboard.SPACEBAR) || this.cursors.J.isDown) {
         this.player.fireLaser();
     }
   },
