@@ -3,17 +3,17 @@ TODO
 - [x] Seperate Player, Enemy, World objects
   - http://toastedware.com/?p=258
 - [ ] Enemies
-  - [ ] Bullet/missle & collision w/enemy
+  - [x] Bullet/missle & collision w/enemy
   - [ ] Enemies move downward
   - [ ] Collision with enemy/player = death
-  - [ ] Enemies killed by bullets
+  - [x] Enemies killed by bullets
 - [ ] Player
-  - [ ] Player bounded by game world
-  - [ ] Control player wasd/j & arrows/space
+  - [x] Player bounded by game world
+  - [x] Control player wasd/j & arrows/space
   - [ ] Lifes
 - [ ] Game
   - [ ] Score text
-  - [ ] Intro text
+  - [x] Intro text
   - [ ] Winning text
   - [ ] Life meter (3 total)
   - [ ] Sounds
