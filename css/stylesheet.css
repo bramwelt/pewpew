@@ -189,6 +189,11 @@ hr {
   color: #b5e853;
 }
 
+canvas {
+  display: block;
+  margin: auto;
+}
+
 /* Buttons
 */
 
