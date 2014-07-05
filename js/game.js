@@ -13,13 +13,13 @@ PewPew.Game = function(game) {
 
 PewPew.Game.prototype = {
   preload: function() {
-    this.load.spritesheet('player', 'img/player.png', 13, 7, 2);
-    this.load.image('laser', 'img/bullet.png');
-    this.load.spritesheet('explosion', 'img/explosion.png', 13, 7, 2);
-    this.load.spritesheet('enemy1', 'img/enemy1.png', 8, 8, 2);
-    this.load.spritesheet('enemy2', 'img/enemy2.png', 11, 8, 2);
-    this.load.spritesheet('enemy3', 'img/enemy3.png', 12, 8, 2);
-    this.load.spritesheet('mothership', 'img/mothership.png', 16, 7, 3);
+    this.load.spritesheet('player', 'assets/player.png', 13, 7, 2);
+    this.load.image('laser', 'assets/bullet.png');
+    this.load.spritesheet('explosion', 'assets/explosion.png', 13, 7, 2);
+    this.load.spritesheet('enemy1', 'assets/enemy1.png', 8, 8, 2);
+    this.load.spritesheet('enemy2', 'assets/enemy2.png', 11, 8, 2);
+    this.load.spritesheet('enemy3', 'assets/enemy3.png', 12, 8, 2);
+    this.load.spritesheet('mothership', 'assets/mothership.png', 16, 7, 3);
   },
 
   create: function() {
