@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+
+    <link rel="stylesheet" type="text/css" href="css/stylesheet.css" media="screen" />
+
+    <title>Pewpew by bramwelt</title>
+
+	<script src="vendor/js/phaser.min.js"></script>
+    <script src="js/mainmenu.js"></script>
+    <script src="js/game.js"></script>
+	<script src="js/player.js"></script>
+    <script src="js/enemies.js"></script>
+
+    <script type="text/javascript">
+      var game = new Phaser.Game(400, 300, Phaser.AUTO, 'container');
+      game.state.add('mainmenu', PewPew.MainMenu);
+      game.state.add('game', PewPew.Game);
+
+      game.state.start('mainmenu');
+  </script>
+</head>
+<body>
+  <div id="container"></div>
+</body>
+</html>
