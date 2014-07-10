@@ -12,6 +12,12 @@ PewPew.Enemies.prototype = Object.create(Phaser.Group.prototype);
 PewPew.Enemies.prototype.constructor = PewPew.Enemies;
 
 PewPew.Enemies.prototype.initialize = function() {
+  this.createEnemies();
+  this.createExplosions();
+  this.game.physics.arcade.enable(this);
+};
+
+PewPew.Enemies.prototype.createEnemies = function() {
   for (var x = 0; x < 11; x++) {
       var enemy = this.create(this.OFFSETX+(x*18), this.OFFSETY, 'enemy1');
       enemy.anchor.setTo(0.5, 0.5);
@@ -34,18 +40,20 @@ PewPew.Enemies.prototype.initialize = function() {
           enemy3.animations.play('fly', 1, true);
       }
   }
+};
 
-  this.game.physics.arcade.enable(this);
-
-  this.explosions = this.game.add.group();
-  this.explosions.createMultiple(55, 'explosion');
-  this.explosions.callAll('anchor.setTo', 'anchor', 0.5, 0.5);
-  this.explosions.callAll('animations.add', 'animations', 'explode');
-
+PewPew.Enemies.prototype.createMothership = function() {
   //mothership = this.create(this.midx+64, 0, 'mothership');
   //mothership.animations.add('fly');
   //mothership.animations.play('fly', 1, true);
   //mothership.kill();
+};
+
+PewPew.Enemies.prototype.createExplosions = function() {
+  this.explosions = this.game.add.group();
+  this.explosions.createMultiple(55, 'explosion');
+  this.explosions.callAll('anchor.setTo', 'anchor', 0.5, 0.5);
+  this.explosions.callAll('animations.add', 'animations', 'explode');
 };  
 
 PewPew.Enemies.prototype.collisionHandler = function(laser, enemy) {
