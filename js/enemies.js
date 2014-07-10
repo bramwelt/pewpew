@@ -37,8 +37,22 @@ PewPew.Enemies.prototype.initialize = function() {
 
   this.game.physics.arcade.enable(this);
 
+  this.explosions = this.game.add.group();
+  this.explosions.createMultiple(55, 'explosion');
+  this.explosions.callAll('anchor.setTo', 'anchor', 0.5, 0.5);
+  this.explosions.callAll('animations.add', 'animations', 'explode');
+
   //mothership = this.create(this.midx+64, 0, 'mothership');
   //mothership.animations.add('fly');
   //mothership.animations.play('fly', 1, true);
   //mothership.kill();
+};  
+
+PewPew.Enemies.prototype.collisionHandler = function(laser, enemy) {
+  laser.kill();
+  enemy.kill();
+  var explosion = this.explosions.getFirstDead();
+  explosion.reset(enemy.x, enemy.y);
+  explosion.revive();
+  explosion.animations.play('explode', 2, false);
 };

@@ -31,11 +31,6 @@ PewPew.Game.prototype = {
     this.enemies = new PewPew.Enemies(this.game);
     this.enemies.initialize();
 
-    this.explosions = this.game.add.group();
-    this.explosions.createMultiple(55, 'explosion');
-    this.explosions.callAll('anchor.setTo', 'anchor', 0.5, 0.5);
-    this.explosions.callAll('animations.add', 'animations', 'explode');
-
     this.cursors = this.input.keyboard.createCursorKeys();
     this.input.keyboard.addKeyCapture([Phaser.Keyboard.SPACEBAR]);
     this.cursors.J = this.input.keyboard.addKey(Phaser.Keyboard.J);
@@ -47,7 +42,7 @@ PewPew.Game.prototype = {
   },
 
   update: function() {
-    this.game.physics.arcade.overlap(this.player.laser, this.enemies, this.collisionHandler, null, this);
+    this.game.physics.arcade.overlap(this.player.laser, this.enemies, this.enemies.collisionHandler, null, this.enemies);
 
     this.player.body.velocity.x = 0;
  
@@ -62,12 +57,4 @@ PewPew.Game.prototype = {
     }
   },
 
-  collisionHandler: function(laser, enemy) {
-    laser.kill();
-    enemy.kill();
-    var explosion = this.explosions.getFirstDead();
-    explosion.reset(enemy.x, enemy.y);
-    explosion.revive();
-    explosion.animations.play('explode', 2, false);
-  },
 };
